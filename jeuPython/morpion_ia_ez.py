@@ -87,6 +87,7 @@ def victory(board, symbol):
         return True
     return False
 
+
 def reset():
     """
           Cette fonction réinitialise le jeu.
