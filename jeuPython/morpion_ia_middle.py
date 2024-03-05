@@ -67,6 +67,7 @@ def ai_defensive():
     # Si aucune action défensive n'est nécessaire, joue au hasard
     return ai_easy()
 
+
 def ai_easy():
     empty_cellule = np.argwhere(np_board == " ")
     if len(empty_cellule) > 0:
@@ -85,6 +86,7 @@ def draw():
         return True
     return False
 
+
 def victory(board, symbol):
     """
         Cette fonction vérifie s'il y a une victoire pour un joueur.
@@ -100,6 +102,7 @@ def victory(board, symbol):
     elif np.all(np.diag(np.fliplr(np_board)) == symbol):
         return True
     return False
+
 
 def reset():
     """
