@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import numpy as np
+import morpion_ia_ez
 
 def create_board_ia_hard(win_morpion):
     """
@@ -44,6 +45,55 @@ def ca_click(line, colum):
 
         else:
             player = (player + 1) % 2
+            if player == 1:
+                ai_play = ai_attack()
+                if ai_play:
+                    ca_click(ai_play[0], ai_play[1])
+
+def ai_attack():
+    """
+        Recherche des opportunités de bloquer le joueur
+    """
+
+
+    for i in range(3):
+        for j in range(3):
+            if np_board[i, j] == " ":
+                np_board[i, j] = symbols[0]  # Temporairement simule un mouvement du joueur
+                if victory(board, symbols[0]):
+                    np_board[i, j] = " "  # Annule la simulation
+                    return [i, j]  # Bloque le joueur
+                np_board[i, j] = " "  # Annule la simulation
+
+    for i in range(3):
+        for j in range(3):
+            if np_board[i, j] == " ":
+                np_board[i, j] = symbols[0]  # Temporairement simule un mouvement du joueur
+                if victory(board, symbols[0]):
+                    np_board[i, j] = " "  # Annule la simulation
+                    np_board[i, j] = symbols[0]
+                    return 
+                else:
+                    return [i, j]  # Bloque le joueur
+
+                np_board[i, j] = " "  # Annule la simulation
+
+
+
+    # Si aucune action défensive n'est nécessaire, joue au hasard
+    return ai_easy()
+
+def ai_easy():
+    empty_cellule = np.argwhere(np_board == " ")
+    if len(empty_cellule) > 0:
+        return (list(empty_cellule[np.random.choice(len(empty_cellule))]))
+    else:
+        draw()
+        messagebox.showinfo("Draw", "egalite")
+        reset()
+
+
+
 def draw():
     """
           Cette fonction vérifie s'il y a un match nul.
