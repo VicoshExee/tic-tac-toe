@@ -5,7 +5,7 @@ import numpy as np
 
 def create_board_ia_hard(win_morpion):
     """
-            Cette fonction crée le plateau de jeu en prenant en paramètre la fenêtre tkinter et le retourne.
+        Cette fonction crée le plateau de jeu en prenant en paramètre la fenêtre tkinter et le retourne.
     """
 
     global symbols, player, np_board, round, board
@@ -25,8 +25,8 @@ def create_board_ia_hard(win_morpion):
 
 def ca_click(line, colum):
     """
-          Cette fonction effectue une action lorsqu'un bouton du plateau est cliqué.
-          Elle prend en paramètre la ligne et la colonne du bouton cliqué.
+        Cette fonction effectue une action lorsqu'un bouton du plateau est cliqué.
+        Elle prend en paramètre la ligne et la colonne du bouton cliqué.
     """
     global player, round
     if np_board[line, colum] == " ":
@@ -52,9 +52,10 @@ def ca_click(line, colum):
 
 def ai_attack():
     """
-    Recherche des opportunités de gagner et bloque le joueur si nécessaire.
+        Recherche des opportunités de gagner et bloquer le joueur si nécessaire en simulant des coups.
     """
-    for i in range(3): #regarde si elle peut gagner
+    #regarde si elle peut gagner 
+    for i in range(3): 
         for j in range(3):
             if np_board[i, j] == " ":
                 np_board[i, j] = symbols[1]
@@ -62,8 +63,9 @@ def ai_attack():
                     np_board[i, j] = " "
                     return [i, j]
                 np_board[i, j] = " "
-
-    for i in range(3): #regarde si elle peut bloquer
+                
+    # regarde si elle peut bloquer
+    for i in range(3): 
         for j in range(3):
             if np_board[i, j] == " ":
                 np_board[i, j] = symbols[0]
@@ -76,18 +78,22 @@ def ai_attack():
     return ai_easy()
 
 def ai_easy():
+    """
+        Cette fonction permet à l'IA facile de jouer un coup.
+        elle retourne une liste contenant les coordonnées (ligne, colonne) de la case où l'IA va jouer.
+    """
     empty_cellule = np.argwhere(np_board == " ")
     if len(empty_cellule) > 0:
         return (list(empty_cellule[np.random.choice(len(empty_cellule))]))
     else:
         draw()
-        messagebox.showinfo("Draw", "egalite")
+        messagebox.showinfo("Draw", "égalité")
         reset()
 
 def draw():
     """
-          Cette fonction vérifie s'il y a un match nul.
-          Elle retourne True si le match est nul, sinon False.
+        Cette fonction vérifie s'il y a un match nul.
+        Elle retourne True si le match est nul, sinon False.
     """
     if round ==9:
         return True
@@ -95,9 +101,9 @@ def draw():
 
 def victory(board, symbol):
     """
-           Cette fonction vérifie s'il y a une victoire pour un joueur.
-           Elle prend en paramètres le plateau de jeu et le symbole du joueur.
-           Elle retourne True si le joueur a gagné, sinon False.
+        Cette fonction vérifie s'il y a une victoire pour un joueur.
+        Elle prend en paramètres le plateau de jeu et le symbole du joueur.
+        Elle retourne True si le joueur a gagné, sinon False.
     """
     if np.any(np.all(np_board == symbol, axis=0)):
         return True
@@ -111,8 +117,8 @@ def victory(board, symbol):
 
 def reset():
     """
-          Cette fonction réinitialise le jeu.
-          Elle réinitialise les variables globales et réinitialise les boutons du plateau.
+        Cette fonction réinitialise le jeu.
+        Elle réinitialise les variables globales et réinitialise les boutons du plateau.
     """
     global board, player, round, np_board
     np_board = np.full((3, 3), " ")
