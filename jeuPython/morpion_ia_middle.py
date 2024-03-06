@@ -26,8 +26,8 @@ def create_board_ia_middle(win_morpion):
 
 def ca_click(line, colum):
     """
-          Cette fonction effectue une action lorsqu'un bouton du plateau est cliqué.
-          Elle prend en paramètre la ligne et la colonne du bouton cliqué.
+        Cette fonction effectue une action lorsqu'un bouton du plateau est cliqué.
+        Elle prend en paramètre la ligne et la colonne du bouton cliqué.
     """
     global player, round
     if np_board[line, colum] == " ":
@@ -53,22 +53,25 @@ def ca_click(line, colum):
 
 def ai_defensive():
     """
-        Recherche des opportunités de bloquer le joueur
+        Recherche des opportunités de bloquer le joueur en simulant les coups possibles
     """
     for i in range(3):
         for j in range(3):
             if np_board[i, j] == " ":
-                np_board[i, j] = symbols[0]  # Temporairement simule un mouvement du joueur
+                np_board[i, j] = symbols[0]
                 if victory(board, symbols[0]):
-                    np_board[i, j] = " "  # Annule la simulation
-                    return [i, j]  # Bloque le joueur
-                np_board[i, j] = " "  # Annule la simulation
+                    np_board[i, j] = " "
+                    return [i, j]
+                np_board[i, j] = " "
 
     # Si aucune action défensive n'est nécessaire, joue au hasard
     return ai_easy()
 
-
 def ai_easy():
+    """
+        Cette fonction permet à l'IA facile de jouer un coup.
+        elle retourne une liste contenant les coordonnées (ligne, colonne) de la case où l'IA va jouer.
+    """
     empty_cellule = np.argwhere(np_board == " ")
     if len(empty_cellule) > 0:
         return (list(empty_cellule[np.random.choice(len(empty_cellule))]))
@@ -86,7 +89,6 @@ def draw():
         return True
     return False
 
-
 def victory(board, symbol):
     """
         Cette fonction vérifie s'il y a une victoire pour un joueur.
@@ -103,11 +105,10 @@ def victory(board, symbol):
         return True
     return False
 
-
 def reset():
     """
-          Cette fonction réinitialise le jeu.
-          Elle réinitialise les variables globales et réinitialise les boutons du plateau.
+        Cette fonction réinitialise le jeu.
+        Elle réinitialise les variables globales et réinitialise les boutons du plateau.
     """
     global board, player, round, np_board
     np_board = np.full((3, 3), " ")
