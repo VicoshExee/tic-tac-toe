@@ -81,6 +81,3 @@ def reset():
     for i in range(3):
         for j in range(3):
             board[i][j].config(text=" ", state=tk.NORMAL)
-
-
-
