@@ -9,28 +9,45 @@ win_jeu.title("Jeu Rétro")
 win_jeu.maxsize(900, 600)
 win_jeu.config(bg="skyblue")
 
-
 def start_game_multi():
+    """
+        Fonction pour démarrer le jeu en mode multijoueur
+    """
     suppr_right_frame()
     create_board(right_frame)
 
 def start_game_ia_easy():
+    """
+        Fonction pour démarrer le jeu contre l'IA en mode facile
+    """
     suppr_right_frame()
     create_board_ia_easy(right_frame)
 
 def start_game_ia_middle():
+    """
+        Fonction pour démarrer le jeu contre l'IA en mode intermédiaire
+    """
     suppr_right_frame()
     create_board_ia_middle(right_frame)
 
 def start_game_ia_hard():
+    """
+        Fonction pour démarrer le jeu contre l'IA en mode difficile
+    """
     suppr_right_frame()
     create_board_ia_hard(right_frame)
 
 def suppr_right_frame():
+    """
+        Fonction pour supprimer les widgets dans le cadre de droite
+    """
     for i in right_frame.winfo_children():
         i.destroy()
 
 def button_morpion():
+    """
+        Fonction pour gérer le clic sur le bouton "Morpion"
+    """
     suppr_right_frame()
     boutton_morpion_multi = tk.Button(right_frame, text="1 VS 1", command= start_game_multi)
     boutton_morpion_multi.grid(row=0, column=0, padx=5, pady=5)
@@ -64,6 +81,4 @@ boutton_puissance4.grid(row=2, column=0, padx=5, pady=5)
 right_frame = tk.Frame(win_jeu, width=650, height=400, bg='grey')
 right_frame.grid(row=0, column=1, padx=10, pady=5)
 
-
 win_jeu.mainloop()
-
